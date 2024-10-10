@@ -1,0 +1,10 @@
+/* use goolge raleway font */
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,100,400');
+
+body{
+    font-family: 'Raleway', sans-serif;
+    height: 100vh; /* full view port height */
+    background: #333;
+    color: #ccc;
+    overflow: hidden;
+}
