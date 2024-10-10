@@ -36,6 +36,15 @@ h2 {
     color: #aaa;
 }
 
+/* add a cursor */
+/* select span inside span */
+.txt-type > .txt {
+
+    border-right: 0.2rem solid #777;
+
+}
+
+
 
 /* adjust text size according to screen size */
 
