@@ -47,25 +47,65 @@ TypeWriter.prototype.type = function() {
     }
 
     /* The substring() method extracts a portion of a string and returns it as a new string. 
-       
-            string.substring(startIndex, endIndex);
+        
+        string.substring(startIndex, endIndex);
 
-            startIndex: 
-            The index of the first character to include in the extracted substring.
+        startIndex: 
+        The index of the first character to include in the extracted substring.
 
-            endIndex (Optional): 
-            The index of the character to stop at (but not include). 
-            If omitted, it extracts to the end of the string.
-    
-     */
+        endIndex (Optional): 
+        The index of the character to stop at (but not include). 
+        If omitted, it extracts to the end of the string. 
+    */
 
     // insert modified txt into txtElement (span)
     this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
 
 
+    // Initial type speed
+    // take 300 milliseconds to complete
+    let typeSpeed = 300;
 
-    // run above code every 0.5 second
-    setTimeout(() => this.type(), 500)
+    if(this.isDeleting){
+
+        // typeSpeed = typeSpeed / 2
+        // take 150 milliseconds (clearing faster)
+        typeSpeed /= 2;
+
+    }
+
+    // Completing typing & clearing
+
+    // isDeleting is false 
+    // txt = full text of first word
+    if(!this.isDeleting && this.txt === fullTxt){
+
+        // typing word is complete
+
+        // wait / pause at end
+        typeSpeed = this.wait;
+
+        // start clearing 
+        this.isDeleting = true;
+
+    } else if (this.isDeleting && this.txt === ''){
+
+        // clearing word is complete
+
+        // stop clearing
+        this.isDeleting = false;
+
+        // move to next word
+        // incease index
+        this.wordIndex++;
+
+        // pause 500ms before start typing
+        typeSpeed = 500;
+
+    }
+
+    // set typeSpeed to setTimeout()
+    setTimeout(() => this.type(), typeSpeed)
 }
 
 // Initialize on DOM load
