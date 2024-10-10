@@ -1,7 +1,5 @@
-
-// txtElement: <span
-// words: data-words=""
-// wait: wait time (default 3000)
+/* 
+// txtElement: <span // words: data-words="" // wait: wait time (default 3000)
 const TypeWriter = function(txtElement, words, wait = 3000){
 
     this.txtElement = txtElement;
@@ -46,7 +44,7 @@ TypeWriter.prototype.type = function() {
 
     }
 
-    /* The substring() method extracts a portion of a string and returns it as a new string. 
+     The substring() method extracts a portion of a string and returns it as a new string. 
         
         string.substring(startIndex, endIndex);
 
@@ -56,7 +54,7 @@ TypeWriter.prototype.type = function() {
         endIndex (Optional): 
         The index of the character to stop at (but not include). 
         If omitted, it extracts to the end of the string. 
-    */
+    
 
     // insert modified txt into txtElement (span)
     this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
@@ -106,6 +104,65 @@ TypeWriter.prototype.type = function() {
 
     // set typeSpeed to setTimeout()
     setTimeout(() => this.type(), typeSpeed)
+} */
+
+
+// Using an ES6 Class
+class TypeWriter {
+
+    constructor(txtElement, words, wait = 3000) {
+        this.txtElement = txtElement;
+        this.words = words;
+        this.txt = ''; 
+        this.wordIndex = 0; 
+        this.wait = parseInt(wait, 10); 
+        this.type(); 
+        this.isDeleting = false; 
+    }
+
+    // alt for prototype method
+    type(){
+        const current = this.wordIndex % this.words.length;
+        const fullTxt = this.words[current];
+        console.log(fullTxt);
+    
+
+        if(this.isDeleting){
+
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+    
+        } else { 
+    
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+    
+        }
+
+        this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
+    
+        let typeSpeed = 300;
+    
+        if(this.isDeleting){
+
+            typeSpeed /= 2;
+    
+        }
+    
+        if(!this.isDeleting && this.txt === fullTxt){
+  
+            typeSpeed = this.wait;
+            this.isDeleting = true;
+    
+        } else if (this.isDeleting && this.txt === ''){
+    
+            this.isDeleting = false;
+            this.wordIndex++;
+            typeSpeed = 500;
+    
+        }
+    
+        setTimeout(() => this.type(), typeSpeed)
+    }
+    
 }
 
 // Initialize on DOM load
