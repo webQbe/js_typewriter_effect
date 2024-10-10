@@ -21,7 +21,12 @@ TypeWriter.prototype.type = function() {
     // current = passed word index % words array length
     const current = this.wordIndex % this.words.length;
 
-    console.log(current);
+    // get full text of current word
+    const fullTxt = this.words[current];
+
+    console.log(fullTxt);
+
+
 
     // call type() method every 0.5 second
     setTimeout(() => this.type(), 500)
