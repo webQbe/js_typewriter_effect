@@ -17,7 +17,11 @@ const TypeWriter = function(txtElement, words, wait = 3000){
 // type() method
 TypeWriter.prototype.type = function() {
 
-    console.log('Hello');
+    // get current index of word 
+    // current = passed word index % words array length
+    const current = this.wordIndex % this.words.length;
+
+    console.log(current);
 
     // call type() method every 0.5 second
     setTimeout(() => this.type(), 500)
