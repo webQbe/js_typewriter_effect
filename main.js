@@ -26,9 +26,45 @@ TypeWriter.prototype.type = function() {
 
     console.log(fullTxt);
 
+    // check if clearing or typing
+    if(this.isDeleting){
+
+        // Remove character
+        // txt = whatever in the span / length is 0 at start
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+
+        // e.g.: this.txt = "Hell".substring(0, 3); // Result: "Hel"
+
+    } else { 
+
+        // typing
+        // Add character
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+
+        // e.g.: this.txt = "Hello".substring(0, 4); // Result: "Hell"
 
 
-    // call type() method every 0.5 second
+    }
+
+    /* The substring() method extracts a portion of a string and returns it as a new string. 
+       
+            string.substring(startIndex, endIndex);
+
+            startIndex: 
+            The index of the first character to include in the extracted substring.
+
+            endIndex (Optional): 
+            The index of the character to stop at (but not include). 
+            If omitted, it extracts to the end of the string.
+    
+     */
+
+    // insert modified txt into txtElement (span)
+    this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
+
+
+
+    // run above code every 0.5 second
     setTimeout(() => this.type(), 500)
 }
 
